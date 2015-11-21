@@ -1,0 +1,2 @@
+# TakenScreenShotsLiner
+スクリーンショットを撮って並べるツール
