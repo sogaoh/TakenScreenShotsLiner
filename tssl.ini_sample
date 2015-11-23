@@ -1,0 +1,4 @@
+[path]
+apache.docroot:/var/www/html
+output.htmldir:%(apache.docroot)s/takenscreen
+output.shotsdir:%(output.htmldir)s/shots

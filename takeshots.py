@@ -54,7 +54,7 @@ def read_csv(csv_file):
     return csv_obj
 
 
-def pre(ini_file="tssl.ini", csv_file="tssl.csv"):
+def pre(ini_file, csv_file):
     ini = read_ini(ini_file)
     confirm_path(ini)
     targets = read_csv(csv_file)
@@ -92,5 +92,16 @@ def main(param):
 
 
 if __name__ == "__main__":
-    param = pre()
+    argv = sys.argv
+    if len(argv) >= 3:
+        ini_file = argv[1]
+        csv_file = argv[2]
+    elif len(argv) == 2:
+        ini_file = argv[1]
+        csv_file = "tssl.csv"
+    elif len(argv) <= 1:
+        ini_file = "tssl.ini"
+        csv_file = "tssl.csv"
+
+    param = pre(ini_file, csv_file)
     main(param)

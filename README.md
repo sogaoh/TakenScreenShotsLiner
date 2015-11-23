@@ -2,15 +2,29 @@
 スクリーンショットを撮って並べるツール
 
 # 参考情報
-- http://qiita.com/sogaoh/items/c5005f7c93a9d4b8e8c4
-- http://sogaoh.hatenablog.com/entry/2015/11/21/223131
+- 環境設定
+	- http://sogaoh.hatenablog.com/entry/2015/11/21/223131
+- 機能概要
+	- http://qiita.com/sogaoh/items/c5005f7c93a9d4b8e8c4
 
-# 利用手順
+# 利用手順概要
+- Selenium Server をバックグラウンドで起動しておく
+```
+nohup java -jar /opt/selenium-server-standalone-2.22.0.jar &
+```
 - スクリーンショット出力先・整列HTML出力先の定義 (ini)
+	- sample: tssl.ini_sample
 - ターゲットファイルの定義 (CSV)
-	- URL
-	- スクリーンショットファイル名 (拡張子除く)
+	- sample: tssl.csv_sample
 - スクリーンショット取得実行
+```
+cd {TakenScreenShostsLiner Dir}
+python ./takeshots.py [./tssl.ini [./tssl.csv]]
+```
 - スクリーンショット整列HTML出力実行
+```
+groovy ./liner.groovy [./tssl.ini [./tssl.csv]]
+```
 - スクリーンショット整列HTMLを表示させてチェック
+
 
