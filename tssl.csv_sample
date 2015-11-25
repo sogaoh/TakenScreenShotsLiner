@@ -1,2 +1,6 @@
-url,pngShortName
-https://www.google.co.jp/,google
+#url,pngShortName
+https://www.python.org/,Python
+http://www.groovy-lang.org/,Groovy
+https://jenkins-ci.org/,Jenkins
+http://www.seleniumhq.org/,Selenium
+http://www.gebish.org/,Geb

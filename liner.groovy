@@ -1,5 +1,3 @@
-//@Grab('com.xlson.groovycsv:groovycsv:1.1')
-//import com.xlson.groovycsv.CsvParser
 @Grab(group='net.sf.opencsv', module='opencsv', version='2.3')
 import au.com.bytecode.opencsv.*
 import groovy.xml.MarkupBuilder
@@ -14,16 +12,13 @@ cli.h(longOpt:'height',    args:1, argName:'cell-height', 'HEIGHT of a screensho
 def getIni(options) {
     def iniFile = (!options.p ? "./tssl.ini" : options.p)
     def config = new ConfigSlurper().parse(new File(iniFile).toURI().toURL())
-    //print(config.toString())
     return config
 }
 
 
 def getCsv(options) {
     def csvFile = (!options.l ? "./tssl.csv" : options.l)
-    //def list = new CsvParser().parse(new File(csvFile).text, separator: ',', quoteChar: '"')
     def list = new CSVReader(new File(csvFile).newReader('UTF-8')).readAll()
-    //list.each { println it }
     return list
 }
 
@@ -87,36 +82,6 @@ def lineShots(ini, csv, argv) {
 }
 
 
-def createTakenShotsTableByBuilder(ini, csv, argv)  {
-    def strWriter = new StringWriter()
-    new MarkupBuilder(strWriter).table(border:'1') {
-        //tr {
-            //th()
-            //columns.each { title -> th(title)}
-        //}
-        def curIndex = 0
-        def curRow = 1
-        (1..rowCount).each { row ->
-            tr {
-                columns.each { v -> td(v){
-                    img(
-                            border:1,
-                            src:"",      //ini.apache.shotsdir+'/',
-                            width:120,
-                            height:90,
-                            alt:curIndex+1
-                        )
-                    }
-                    curIndex += 1
-                }
-            }
-            curRow += 1
-        }
-    }
-    strWriter.toString()
-}
-
-
 def outTable(tableStr) {
     tableStr.toString()
 }
@@ -129,11 +94,13 @@ def outTable(tableStr) {
 argv = cli.parse(args)
 ini = getIni(argv)
 csv = getCsv(argv)
-//tableStr = createTakenShotsTableByBuilder(ini, csv, argv)
 tableStr = lineShots(ini, csv, argv)
 
-//def fileWriter = new FileWriter(ini.output.shotsdir+'/index.html')
-def fileWriter = new FileWriter('index.html')
+htmlPath = 'index.html'
+if(ini.output.mode == "prod"){
+    htmlPath = ini.output.shotsdir+'/index.html'
+}
+def fileWriter = new FileWriter(htmlPath)
 def builder = new MarkupBuilder(fileWriter)
 builder.html {
     head {
