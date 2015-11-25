@@ -95,7 +95,7 @@ tableStr = lineShots(ini, csv, argv)
 
 htmlPath = 'index.html'
 if(ini.output.mode == "prod"){
-    htmlPath = ini.output.shotsdir+'/index.html'
+    htmlPath = ini.output.htmldir+'/index.html'
 }
 def fileWriter = new FileWriter(htmlPath)
 def builder = new MarkupBuilder(fileWriter)

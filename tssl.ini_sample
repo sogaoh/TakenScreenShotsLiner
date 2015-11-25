@@ -1,6 +1,6 @@
 [path]
-apache.docroot=/var/www/html
-apache.shotsdir=./shots
-output.mode=develop
-output.htmldir=/var/www/html/takenscreen
-output.shotsdir=/var/www/html/takenscreen/shots
+apache.docroot="/var/www/html"
+apache.shotsdir="./shots"
+output.mode="develop"
+output.htmldir="/var/www/html/takenscreen"
+output.shotsdir="/var/www/html/takenscreen/shots"
