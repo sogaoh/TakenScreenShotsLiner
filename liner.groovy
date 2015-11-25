@@ -52,9 +52,6 @@ def lineShots(ini, csv, argv) {
 
         sb.append("  <td>"+"\n")
         index = 0
-        shortName = ""
-        imgPath = ""
-        altUrl = ""
         for (col in row) {
             if(index==0){
                 altUrl = col
