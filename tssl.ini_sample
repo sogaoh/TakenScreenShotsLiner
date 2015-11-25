@@ -1,4 +1,5 @@
 [path]
-apache.docroot:/var/www/html
-output.htmldir:%(apache.docroot)s/takenscreen
-output.shotsdir:%(output.htmldir)s/shots
+apache.docroot=/var/www/html
+apache.shotsdir=./shots
+output.htmldir=/var/www/html/takenscreen
+output.shotsdir=/var/www/html/takenscreen/shots

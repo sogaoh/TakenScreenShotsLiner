@@ -23,7 +23,7 @@ python ./takeshots.py [./tssl.ini [./tssl.csv]]
 ```
 - スクリーンショット整列HTML出力実行
 ```
-groovy ./liner.groovy [./tssl.ini [./tssl.csv]]
+groovy ./liner.groovy [-p ./tssl.ini [-l ./tssl.csv [-w 120 [-h 90]]]]
 ```
 - スクリーンショット整列HTMLを表示させてチェック
 
