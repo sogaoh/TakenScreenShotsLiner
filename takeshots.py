@@ -73,7 +73,7 @@ def main(param):
     if len(param[1]) <= 0:
         sys.exit(-8)
     paths = param[0]
-    shotsdir = paths.get('path', 'output.shotsdir')
+    shotsdir = paths.get('path', 'output.shotsdir').lstrip('"').rstrip('"')
     targets = param[1]
 
     display = Display(visible=0, size=(800, 600))
