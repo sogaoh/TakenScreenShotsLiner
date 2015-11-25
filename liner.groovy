@@ -113,3 +113,4 @@ builder.html {
 }
 
 //cli.usage()
+println "Check: "+ini.output.htmlurl
