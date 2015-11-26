@@ -7,6 +7,7 @@ cli.p(longOpt:'path-file', args:1, argName:'path-file',   'PATH Definitions File
 cli.l(longOpt:'list-file', args:1, argName:'list-file',   'Targets of take screenshots LIST File Path')
 cli.w(longOpt:'width',     args:1, argName:'cell-width',  'WIDTH of a screenshot')
 cli.h(longOpt:'height',    args:1, argName:'cell-height', 'HEIGHT of a screenshot')
+cli.t(longOpt:'timezone',  args:1, argName:'timezone-id', 'TIMEZONE for output html')   //see http://lab.hidetake.org/util/timezones
 
 
 def getIni(options) {
@@ -20,6 +21,12 @@ def getCsv(options) {
     def csvFile = (!options.l ? "./tssl.csv" : options.l)
     def list = new CSVReader(new File(csvFile).newReader('UTF-8')).readAll()
     return list
+}
+
+
+def getTimeStr(options){
+    def timezone = (!options.t ? "JST" : options.t)
+    return (new Date().format("yyyy/MM/dd(E) HH:mm [z]", TimeZone.getTimeZone(timezone)))
 }
 
 
@@ -91,6 +98,7 @@ def outTable(tableStr) {
 argv = cli.parse(args)
 ini = getIni(argv)
 csv = getCsv(argv)
+timeStr = getTimeStr(argv)
 tableStr = lineShots(ini, csv, argv)
 
 htmlPath = 'index.html'
@@ -104,7 +112,7 @@ builder.html {
         title 'Taken Screenshots'
     }
     body {
-        h1 'HTML genarated at ' + (new Date().format("yyyy/MM/dd(E) HH:mm"))   //時刻
+        h1 'HTML genarated at ' + timeStr   //時刻
 
         div{
             mkp.yieldUnescaped(outTable(tableStr))
