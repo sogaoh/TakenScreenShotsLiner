@@ -1,6 +1,7 @@
 @Grab(group='net.sf.opencsv', module='opencsv', version='2.3')
 import au.com.bytecode.opencsv.*
 import groovy.xml.MarkupBuilder
+import java.text.SimpleDateFormat;
 
 def cli = new CliBuilder(usage: 'groovy liner.groovy [options]')
 cli.p(longOpt:'path-file', args:1, argName:'path-file',   'PATH Definitions File Path')
@@ -42,6 +43,10 @@ def lineShots(ini, csv, argv) {
     def w = (!argv.w ? 120 : argv.w)
     def h = (!argv.h ? 90 : argv.h)
 
+    def timezone = (!argv.t ? "JST" : argv.t)
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd(E) HH:mm [z]");
+    sdf.setTimeZone(TimeZone.getTimeZone(timezone))
+
     def sb = new StringBuilder()
     index=0
     tbRow = 0
@@ -61,16 +66,17 @@ def lineShots(ini, csv, argv) {
         index = 0
         for (col in row) {
             if(index==0){
-                altUrl = col
+                ldUrl = col
             }
             if(index==1){
                 shortName = col
                 imgPath = ini.apache.shotsdir+"/"+shortName+".png"
+                imgDate = sdf.format((new File(ini.output.shotsdir+"/"+shortName+".png")).lastModified());
             }
             index++
         }
         sb.append("  "+shortName+"\n")
-        sb.append("  "+"<img border='1' src='"+imgPath+"' width='"+w+"' height='"+h+"' alt='"+altUrl+"' />"+"\n")
+        sb.append("  "+"<img border='1' src='"+imgPath+"' width='"+w+"' height='"+h+"' alt='"+imgDate+"' longdesc='"+ldUrl+"' />"+"\n")
         sb.append("  </td>"+"\n")
 
         if(tbCol==colSize){
@@ -110,6 +116,7 @@ def builder = new MarkupBuilder(fileWriter)
 builder.html {
     head {
         title 'Taken Screenshots'
+        meta(content: 'text/html; charset=UTF-8')
     }
     body {
         h1 'HTML genarated at ' + timeStr   //時刻

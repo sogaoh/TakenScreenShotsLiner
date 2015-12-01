@@ -81,10 +81,11 @@ def main(param):
 
     browser = webdriver.Firefox()
 
-    for tgt in targets:
+    tgt_len = len(targets)
+    for i, tgt in enumerate(targets):
         browser.get(tgt[0])
         browser.save_screenshot(shotsdir+'/'+tgt[1]+'.png')
-        print 'Took '+tgt[1]+'.png'
+        print '( %3d / %3d ) Took %s.png' % (i+1, tgt_len, tgt[1])
 
     browser.quit()
 
