@@ -8,8 +8,11 @@
 	- http://qiita.com/sogaoh/items/c5005f7c93a9d4b8e8c4
 
 # 利用手順概要
-- Selenium Server をバックグラウンドで起動しておく
+- [未起動だったら] Selenium Server をバックグラウンドで起動
 ```
+sudo su -
+ps -ef | grep selenium
+（java のプロセス :  seleniumのjar呼び出し  がなければ未起動）
 nohup java -jar /opt/selenium-server-standalone-2.22.0.jar &
 ```
 - スクリーンショット出力先・整列HTML出力先の定義 (ini)
