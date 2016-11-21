@@ -7,6 +7,7 @@ import csv
 
 from pyvirtualdisplay import Display
 from selenium import webdriver
+from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
 
 
 def read_ini(ini_file):
@@ -79,7 +80,8 @@ def main(param):
     display = Display(visible=0, size=(800, 600))
     display.start()
 
-    browser = webdriver.Firefox()
+    binary = FirefoxBinary('/opt/forefox/firefox')
+    browser = webdriver.Firefox(firefox_binary=binary)
 
     tgt_len = len(targets)
     for i, tgt in enumerate(targets):
