@@ -80,7 +80,7 @@ def main(param):
     display = Display(visible=0, size=(800, 600))
     display.start()
 
-    binary = FirefoxBinary('/opt/forefox/firefox')
+    binary = FirefoxBinary('/opt/firefox/firefox')
     browser = webdriver.Firefox(firefox_binary=binary)
 
     tgt_len = len(targets)
